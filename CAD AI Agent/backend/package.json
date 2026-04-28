@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "postinstall": "pip install -r ../cad-engine/requirements.txt"
   },
   "dependencies": {
     "cors": "^2.8.5",
