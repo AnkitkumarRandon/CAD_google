@@ -7,9 +7,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY backend/package.json ./backend/
+COPY cad-engine ./cad-engine
 RUN cd backend && npm install
 
-COPY cad-engine ./cad-engine
 RUN python3 -m pip install --no-cache-dir -r cad-engine/requirements.txt
 
 COPY backend ./backend
