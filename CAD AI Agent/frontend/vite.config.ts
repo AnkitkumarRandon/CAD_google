@@ -6,11 +6,11 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      "/upload": "http://localhost:4000",
-      "/analyze": "http://localhost:4000",
-      "/report": "http://localhost:4000",
-      "/health": "http://localhost:4000",
-      "/static": "http://localhost:4000"
+      "/upload": "https://your-backend-url.onrender.com",
+      "/analyze": "https://your-backend-url.onrender.com",
+      "/report": "https://your-backend-url.onrender.com",
+      "/health": "https://your-backend-url.onrender.com",
+      "/static": "https://your-backend-url.onrender.com"
     }
   }
 });
