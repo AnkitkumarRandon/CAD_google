@@ -1,0 +1,6 @@
+{
+  "wallThicknessMm": 1.5,
+  "holeDiameterMm": 0.5,
+  "minimumFeatureSizeMm": 0.8,
+  "sharpAngleRadians": 0.82
+}
