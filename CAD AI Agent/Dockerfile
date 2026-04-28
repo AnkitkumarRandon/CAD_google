@@ -7,7 +7,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY backend/package.json ./backend/
-COPY backend/package-lock.json ./backend/ 2>/dev/null || true
 RUN cd backend && npm install
 
 COPY cad-engine ./cad-engine
