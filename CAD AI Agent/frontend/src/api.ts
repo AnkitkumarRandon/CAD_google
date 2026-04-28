@@ -1,5 +1,7 @@
 import type { AnalysisPayload, UploadResponse } from "./types";
 
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://cad-google.onrender.com';
+
 async function extractError(response: Response, fallback: string): Promise<Error> {
   const text = await response.text();
   if (!text) {
@@ -17,7 +19,7 @@ async function extractError(response: Response, fallback: string): Promise<Error
 export async function uploadCad(file: File): Promise<UploadResponse> {
   const formData = new FormData();
   formData.append("file", file);
-  const response = await fetch("/upload", { method: "POST", body: formData });
+  const response = await fetch(`${API_BASE}/upload`, { method: "POST", body: formData });
   if (!response.ok) {
     throw await extractError(response, "Upload failed");
   }
@@ -25,7 +27,7 @@ export async function uploadCad(file: File): Promise<UploadResponse> {
 }
 
 export async function analyzeCad(fileId: string): Promise<AnalysisPayload> {
-  const response = await fetch("/analyze", {
+  const response = await fetch(`${API_BASE}/analyze`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ fileId })
