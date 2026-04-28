@@ -38,11 +38,11 @@ const upload = multer({
   storage,
   fileFilter: (_req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
-    if ([".stl", ".step", ".stp"].includes(ext)) {
+    if ([".stl"].includes(ext)) {
       cb(null, true);
       return;
     }
-    cb(new Error("Only STEP/STP/STL files are supported"));
+    cb(new Error("Only STL files are currently supported"));
   },
 });
 

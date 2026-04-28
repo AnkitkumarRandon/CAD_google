@@ -73,8 +73,8 @@ export default function App() {
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="flex cursor-pointer items-center justify-center gap-3 rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-4 text-sm font-semibold text-white transition hover:border-glow/40 hover:bg-slate-900">
                 {busyState === "uploading" ? <Loader2 className="h-4 w-4 animate-spin" /> : <UploadCloud className="h-4 w-4" />}
-                Upload STEP/STL
-                <input type="file" accept=".stl,.step,.stp" className="hidden" onChange={handleFileChange} />
+                Upload STL
+                <input type="file" accept=".stl" className="hidden" onChange={handleFileChange} />
               </label>
 
               <button
