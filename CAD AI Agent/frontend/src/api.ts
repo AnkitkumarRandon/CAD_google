@@ -1,6 +1,14 @@
 import type { AnalysisPayload, UploadResponse } from "./types";
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://cad-google.onrender.com';
+const API_BASE = import.meta.env.VITE_API_BASE || "https://cad-google.onrender.com";
+
+function normalizeUrl(url: string): string {
+  try {
+    return new URL(url, API_BASE).toString();
+  } catch {
+    return url;
+  }
+}
 
 async function extractError(response: Response, fallback: string): Promise<Error> {
   const text = await response.text();
@@ -23,7 +31,9 @@ export async function uploadCad(file: File): Promise<UploadResponse> {
   if (!response.ok) {
     throw await extractError(response, "Upload failed");
   }
-  return response.json();
+
+  const data = (await response.json()) as UploadResponse;
+  return { ...data, previewUrl: normalizeUrl(data.previewUrl) };
 }
 
 export async function analyzeCad(fileId: string): Promise<AnalysisPayload> {
@@ -35,5 +45,12 @@ export async function analyzeCad(fileId: string): Promise<AnalysisPayload> {
   if (!response.ok) {
     throw await extractError(response, "Analysis failed");
   }
-  return response.json();
+
+  const data = (await response.json()) as AnalysisPayload;
+  return {
+    ...data,
+    previewUrl: normalizeUrl(data.previewUrl),
+    htmlReportUrl: normalizeUrl(data.htmlReportUrl),
+    jsonReportUrl: normalizeUrl(data.jsonReportUrl),
+  };
 }
